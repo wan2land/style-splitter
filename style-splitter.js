@@ -22,6 +22,9 @@
 	isRegExp = function(value) {
 		return Object.prototype.toString.call(value) === '[object RegExp]';
 	},
+	isString = function(value) {
+		return Object.prototype.toString.call(value) === '[object String]';
+	},
 	extend = function(origin){
 		var targets = [].slice.call(arguments, 1);
 		for (var i = 0, ilen = targets.length; i < ilen; i++) {
@@ -36,7 +39,12 @@
 	},
 	each = function(obj, closure) {
 		var i, length, result;
-		if (typeof obj.length !== 'undefined') {
+		if (isString(obj)) {
+			for (i = 0, length = obj.length; i < length; i++) {
+				result = closure(obj.charAt(i), i, obj);
+				if (result === false) return false;
+			}
+		} else if (typeof obj.length !== 'undefined') {
 			for (i = 0, length = obj.length; i < length; i++) {
 				result = closure(obj[i], i, obj);
 				if (result === false) return false;
