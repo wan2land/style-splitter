@@ -1,0 +1,32 @@
+{
+  "name": "StyleSplitter",
+  "main": "style-splitter.js",
+  "version": "0.0.1",
+  "authors": [
+    "Changwan Jun <me@wani.kr>"
+  ],
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "style",
+    "partial"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "1.10.*",
+    "nanum-barun-gothic": "~1.0.0"
+  }
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>  
+<!--//  
+This web page has been developed by Wani.  
+ - me@wani.kr
+ - http://wani.kr
+-->
+<!--[if lt IE 7]><html class="ie6" lang="ko"><![endif]-->  
+<!--[if IE 7]><html class="ie7" lang="ko"><![endif]-->  
+<!--[if IE 8]><html class="ie8" lang="ko"><![endif]-->  
+<!--[if gt IE 8]><!--><html lang="ko"><!--<![endif]-->  
+<head>  
+<title>Your Title</title>  
+<meta charset="utf-8" />
+ 
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />  
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+ 
+<link rel="stylesheet" href="/vendor/nanum-barun-gothic/nanumbarungothic.css" />
+<style>
+body {
+	font-size:40px;
+	line-height:60px;
+}
+span.en {
+	font-family:"Helvetica Neue", Helvetica, sans-serif;
+	font-weight:200;
+	vertical-align:top;
+}
+span.no {
+	font-family:"Helvetica Neue", Helvetica, sans-serif;
+	font-weight:400;
+}
+span.myExtension {
+	color:red;
+}
+
+</style>
+
+</head>  
+<body>
+<table>
+	<thead>
+		<tr>
+			<th>숫자(No)</th>
+			<th>이름(Name)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>김철수</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Steve Jobs</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>David 김</td>
+		</tr>
+	</tbody>
+</table>
+<script src="/style-splitter.js"></script>
+<script>
+;(function() {
+	var styleSplitter = new StyleSplitter({
+		myExtension: /[2]/
+	});
+	styleSplitter.applyAll();
+})();
+</script>
+</body>  
+</html> 
