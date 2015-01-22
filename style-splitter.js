@@ -10,17 +10,15 @@
 	}
 })(this, function() {
 
-	// for ie :)
-	if (!Array.prototype.indexOf) {
-		Array.prototype.indexOf = function(obj, start) {
+	var
+	indexOf = (function() {
+		return Array.prototype.indexOf ? Array.prototype.indexOf : function(obj, start) {
 			for (var i = (start || 0), j = this.length; i < j; i++) {
 				if (this[i] === obj) { return i; }
 			}
 			return -1;
 		}
-	}
-
-	var
+	})(),
 	isRegExp = function(value) {
 		return Object.prototype.toString.call(value) === '[object RegExp]';
 	},
@@ -56,12 +54,32 @@
 	compare = function(source, target) {
 		if (source.length !== target.length) return false;
 		for (var i = 0, ilen = target.length; i < ilen; i++) {
-			if (source.indexOf(target[i]) === -1) return false;
+			if (indexOf.call(source, target[i]) === -1) return false;
 		}
 		for (var i = 0, ilen = source.length; i < ilen; i++) {
-			if (target.indexOf(source[i]) === -1) return false;
+			if (indexOf.call(target, source[i]) === -1) return false;
 		}
 		return true;
+	},
+	domTraverse = function(node) {
+		var elems= [];
+		if (node) {
+			node = node.firstChild;
+			while (node != null) {
+				if (
+					node.innerHTML &&
+					node.innerHTML == node.innerText &&
+					node.nodeName !== 'SCRIPT'
+				) {
+					elems[elems.length] = node;
+				}
+				else {
+					elems = elems.concat(domTraverse(node));
+				}
+				node = node.nextSibling;
+			}
+		}
+		return elems;
 	},
 	defaultSettings = {
 		en: /[a-zA-Z]/,
@@ -109,10 +127,18 @@
 					bufferString = ch;
 				}
 			});
+			parsedText += self.wrap(lastStyles, bufferString);
 			return parsedText;
 		},
 		applyAll: function() {
-			
+			var
+			self = this,
+			elems = domTraverse(document.body);
+			each(elems, function(elem) {
+				if (elem.innerHTML === elem.innerText && elem.nodeName !== 'SCRIPT') {
+					elem.innerHTML = self.parse(elem.innerText);
+				}
+			});
 		}
 	};
 
